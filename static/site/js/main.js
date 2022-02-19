@@ -107,17 +107,6 @@ $(function () {
     /* ... */
   ];
 
-  $("#palavras").jQCloud(words, {
-    // fontSize: function (width, height, step) {
-    //   if (step == 1) return width * 0.005 * step + "px";
-
-    //   return width * 0.005 * step + "px";
-    // },
-    delayedMode: false,
-    autoResize: true,
-    colors: ["#0FCEFF", "#7B61FF", "#244CB2"],
-  });
-
   $("#dataFiltro").daterangepicker(
     {
       ranges: {
@@ -181,10 +170,10 @@ $(function () {
   );
 });
 
-async function getJson() {
+async function getJson(api_url) {
     let formData = new FormData(document.getElementById('form-busca'));
     let urlParams = new URLSearchParams(formData);
-    let url = window.url_pesquisa + '?' + urlParams.toString();
+    let url = api_url + '?' + urlParams.toString();
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
@@ -197,8 +186,18 @@ async function carregaTimeLine(data) {
 }
 
 async function carregaCloudWords(data) {
-    // Aguardando definição dos dados para preencher a nuvem de palavras
-    return data;
+    $('#palavras').jQCloud('destroy');
+
+    $("#palavras").jQCloud(data, {
+        // fontSize: function (width, height, step) {
+        //   if (step == 1) return width * 0.005 * step + "px";
+
+        //   return width * 0.005 * step + "px";
+        // },
+        delayedMode: false,
+        autoResize: true,
+        colors: ["#0FCEFF", "#7B61FF", "#244CB2"],
+      });
 }
 
 async function carregaMesAno(data){
@@ -228,7 +227,7 @@ async function carregaMesAno(data){
             liAno.appendChild(button);
             ulAno.appendChild(liAno);
         }
-        // Ajusta os botões de mês anterior/próximo e o mês/ano selecionad
+        // Ajusta os botões de mês anterior/próximo e o mês/ano selecionado
         selecionaAno(anoItem);
         seleciona(mesItem - 1);
         container.classList.remove("invisible");
@@ -254,19 +253,21 @@ function consideraBuscaAvancada(){
 
 async function buscaMesAno() {
     consideraBuscaAvancada();
-    let data = await getJson();
+    let data = await getJson(window.url_pesquisa);
     carregaTimeLine(data);
-    carregaCloudWords(data);
+    let cloudWordsData = await getJson(window.url_nuvem_de_palavras);
+    carregaCloudWords(cloudWordsData);
 }
 
 async function buscaPrincipal() {
     document.getElementById('ano-busca').value = '';
     document.getElementById('mes-busca').value = '';
     consideraBuscaAvancada();
-    let data = await getJson();
+    let data = await getJson(window.url_pesquisa);
     carregaTimeLine(data);
-    carregaCloudWords(data);
     carregaMesAno(data);
+    let cloudWordsData = await getJson(window.url_nuvem_de_palavras);
+    carregaCloudWords(cloudWordsData);
 }
 
 let btnBusca = document.getElementById('btn-busca');
