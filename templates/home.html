@@ -3,7 +3,6 @@
 <html lang="pt-br">
 
 <head>
-    {% block head %}
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,10 +13,9 @@
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}site/css/daterangepicker.css" />
     <!-- <link rel="stylesheet" href="css/multiple-select.css"> -->
     <link rel="stylesheet" href="{{ STATIC_URL }}site/css/jqcloud.css">
-
     <link rel="stylesheet" href="{{ STATIC_URL }}site/css/style.css">
-    <title>LARHUD ibict - Timeline Covid-19</title>
-    {% endblock %}
+    {% block extrahead %}{% endblock %}
+    <title>{% block title %}LARHUD ibict - Timeline Covid-19{% endblock %}</title>
 </head>
 
 <body>
