@@ -87,25 +87,6 @@ $(function () {
   var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl);
   });
-  // $('.multiple-select').multipleSelect();
-  var words = [
-    { text: "ciência", weight: 13 },
-    { text: "informação", weight: 12 },
-    { text: "janeiro", weight: 8 },
-    { text: "gestão", weight: 10 },
-    { text: "pós-graduação", weight: 8 },
-    { text: "tecnologia", weight: 7 },
-    { text: "federal", weight: 7 },
-    { text: "programa", weight: 6 },
-    { text: "ibict", weight: 6 },
-    { text: "comunicação", weight: 5 },
-    { text: "membro", weight: 5 },
-    { text: "grupo", weight: 4 },
-    { text: "produção", weight: 4 },
-    { text: "conhecimento", weight: 3 },
-    { text: "mestrado", weight: 3 },
-    /* ... */
-  ];
 
   $("#dataFiltro").daterangepicker(
     {
@@ -176,7 +157,6 @@ async function getJson(api_url) {
     let url = api_url + '?' + urlParams.toString();
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     return data;
 }
 
@@ -194,9 +174,10 @@ async function carregaCloudWords(data) {
 
         //   return width * 0.005 * step + "px";
         // },
+        width: 500,
         delayedMode: false,
         autoResize: true,
-        colors: ["#0FCEFF", "#7B61FF", "#244CB2"],
+        colors: ["#244CB2","#2670E8", "#0075FF", "#0FCEFF", "#7B61FF", "#667085"],
       });
 }
 
@@ -272,6 +253,7 @@ async function buscaPrincipal() {
 
 let btnBusca = document.getElementById('btn-busca');
 let btnBuscaAvancada = document.getElementById('btn-avancada');
+let btnDownload = document.getElementById('btn-download');
 
 btnBusca.addEventListener('click', function (e) {
     e.preventDefault();
@@ -280,6 +262,14 @@ btnBusca.addEventListener('click', function (e) {
 
 btnBuscaAvancada.addEventListener('click', function (e) {
     e.preventDefault();
+});
+
+btnDownload.addEventListener('click', function (e) {
+    e.preventDefault();
+    consideraBuscaAvancada();
+    let formData = new FormData(document.getElementById('form-busca'));
+    let urlParams = new URLSearchParams(formData);
+    window.location = window.url_pesquisa + '?' + urlParams.toString();
 });
 
 window.addEventListener("load", function () {
