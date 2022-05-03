@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load core_extra %}
+
 {% block content %}
     <section class="container descricao">
     <h1>Projeto Timeline Larhud</h1>
@@ -7,16 +9,13 @@
     </section>
     <section class="filtro">
             <div class="container">
-                  <p style="margin-bottom: 10px">Atualmente temos três projetos em andamento:</p>
+                  <p style="margin-bottom: 10px">Atualmente temos os seguintes projetos em desenvolvimento:</p>
+                  {% termos as dataset %}
+                  {% for termo in dataset %}
                   <div class="form">
-                      <a class="btn btn-primary" style="margin-bottom: 10px" href="/timeline/covid/">COVID</a>
+                      <a class="btn btn-primary" style="min-width: 150px; margin-bottom: 10px" href="/timeline/{{ termo.slug }}/">{{ termo.termo }}</a>
                   </div>
-                  <div class="form">
-                      <a class="btn btn-primary" style="margin-bottom: 10px" href="/timeline/eleicoes/">Eleições</a>
-                  </div>
-                  <div class="form">
-                      <a class="btn btn-primary" style="margin-bottom: 10px" href="/timeline/stf/">STF</a>
-                  </div>
+                  {% endfor %}
             </div>
     </section>
 {% endblock %}
