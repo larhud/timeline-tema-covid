@@ -90,6 +90,7 @@ $(function () {
 
   $("#dataFiltro").daterangepicker(
     {
+      autoUpdateInput: false,
       ranges: {
         Hoje: [moment(), moment()],
         Ontem: [moment().subtract(1, "days"), moment().subtract(1, "days")],
@@ -107,10 +108,6 @@ $(function () {
             ? moment().endOf("month")
             : moment(),
         ],
-        "Mês Passado": [
-          moment().subtract(1, "month").startOf("month"),
-          moment().subtract(1, "month").endOf("month"),
-        ],
         "Este ano": [
           moment().startOf("year"),
           moment().isAfter(moment().endOf("year"))
@@ -120,6 +117,10 @@ $(function () {
         "Ano Passado": [
           moment().subtract(1, "year").startOf("year"),
           moment().subtract(1, "year").endOf("year"),
+        ],
+        "Ano Retrasado": [
+          moment().subtract(2, "year").startOf("month"),
+          moment().subtract(2, "year").endOf("month"),
         ],
       },
       locale: {
@@ -150,6 +151,24 @@ $(function () {
     }
   );
 });
+
+$('#dataFiltro').on(
+    "apply.daterangepicker",
+    function (ev, picker) {
+      $(this).val(
+        picker.startDate.format("DD/MM/YYYY") +
+          " - " +
+          picker.endDate.format("DD/MM/YYYY")
+      );
+    }
+  );
+
+$('#dataFiltro').on(
+    "cancel.daterangepicker",
+    function (ev, picker) {
+      $(this).val("");
+    }
+);
 
 async function getJson(api_url) {
     let formData = new FormData(document.getElementById('form-busca'));
