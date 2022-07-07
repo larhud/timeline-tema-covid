@@ -294,3 +294,11 @@ btnDownload.addEventListener('click', function (e) {
 window.addEventListener("load", function () {
     buscaPrincipal();
 });
+
+document.addEventListener('keydown', function (e) {
+    e.stopPropagation(); // **put this line in your code**
+    let key = e.key || e.keycode;
+    if (key === 'Enter' || key === 13) {
+        btnBusca.click();
+    }
+});
