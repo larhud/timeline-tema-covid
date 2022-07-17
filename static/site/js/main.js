@@ -288,7 +288,7 @@ btnDownload.addEventListener('click', function (e) {
     consideraBuscaAvancada();
     let formData = new FormData(document.getElementById('form-busca'));
     let urlParams = new URLSearchParams(formData);
-    window.location = window.url_pesquisa + '?' + urlParams.toString();
+    window.location = '/arquivo_json' + '?' + urlParams.toString();
 });
 
 window.addEventListener("load", function () {
