@@ -4,11 +4,9 @@
         let containerFontes = $('#lista-de-fontes');
         // Atribui o evento para os elementos criados dinâmicamente
         containerPaginas.on('click', "[id^='page-id-']", function () {
-            let children = containerPaginas.children();
-            // Retorna a li do elemento a
-            let element = $(this).parent();
-            let ind = children.index(element);
-            page_click(ind + 1);
+            let element = $(this);
+            let pagina = element.data('page');
+            page_click(pagina);
         });
 
         containerFontes.on('click', '.fonte-item', function () {
@@ -28,7 +26,8 @@
 
                     for (let i = 1; i <= num_paginas; i++) {
                         containerPaginas.append(
-                            '<li class="page-item"><a class="page-link" href="#" id="page-id-' + i + '">' + i + '</a></li>'
+                            '<li class="page-item"><a class="page-link" href="#" id="page-id-' + i + '" ' +
+                            'data-page="' + i + '">' + i + '</a></li>'
                         );
                     }
                 }
@@ -47,6 +46,6 @@
         }
 
         // Preenche a lista da primeira página
-        page_click(1);
+        page_click('1');
     });
 })(jQuery);
