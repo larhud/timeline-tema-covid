@@ -18,6 +18,8 @@
             $('#btn-busca').click();
         });
 
+        containerFontes.tooltip({selector: '[data-toggle="tooltip"]'});
+
         function page_click(pagina) {
             $.get(window.url_lista_de_fontes, {page: pagina}, function (data) {
 
@@ -39,12 +41,14 @@
 
                 data.lista.forEach(function (item) {
                     containerFontes.append(
-                        '<div class="col-md-3"><a href="#select" class="fonte-item">' + item + '</a></div>'
+                        '<div class="col-md-3"><a href="#select" class="fonte-item" data-toggle="tooltip" ' +
+                        'data-placement="top" title="' + item.noticia__fonte__count + ' noticia(s)">' +
+                        item.noticia__fonte + '</a></div>'
                     );
                 });
+
             });
         }
-
         // Preenche a lista da primeira página
         page_click('1');
     });
