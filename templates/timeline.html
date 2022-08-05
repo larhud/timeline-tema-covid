@@ -108,16 +108,8 @@
               </div>
               <div id="fontes-noticia">
                 <div class="collapse borda p-3" id="collapseFonte">
-                    <div class="row">
-                      <div class="col-md-3"><a href="#select">Globo.com</a></div>
-                      <div class="col-md-3"><a href="#select">Estado de São Paulo</a></div>
-                    </div>
-                    <ul class="pagination" style="margin-top:20px; margin-bottom:0px;">
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
+                    <div class="row" id="lista-de-fontes"></div>
+                    <ul class="pagination" style="margin-top:20px; margin-bottom:0px;" id="paginas"></ul>
                 </div>
               </div>
             </div>
@@ -213,6 +205,8 @@
     <script type="text/javascript">
       window.url_pesquisa = '{% url 'pesquisa' %}';
       window.url_nuvem_de_palavras = '{% url 'nuvem_de_palavras' %}';
+      window.url_lista_de_fontes = '{% url 'lista_de_fontes' object.id %}'
     </script>
     <script src="{{ STATIC_URL }}site/js/main.js"></script>
+    <script src="{{ STATIC_URL }}site/js/lista-de-fontes.js"></script>
 {% endblock %}
