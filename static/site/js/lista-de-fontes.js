@@ -4,11 +4,9 @@
         let containerFontes = $('#lista-de-fontes');
         // Atribui o evento para os elementos criados dinâmicamente
         containerPaginas.on('click', "[id^='page-id-']", function () {
-            let children = containerPaginas.children();
-            // Retorna a li do elemento a
-            let element = $(this).parent();
-            let ind = children.index(element);
-            page_click(ind + 1);
+            let element = $(this);
+            let pagina = element.data('page');
+            page_click(pagina);
         });
 
         containerFontes.on('click', '.fonte-item', function () {
@@ -20,6 +18,8 @@
             $('#btn-busca').click();
         });
 
+        containerFontes.tooltip({selector: '[data-toggle="tooltip"]'});
+
         function page_click(pagina) {
             $.get(window.url_lista_de_fontes, {page: pagina}, function (data) {
 
@@ -28,7 +28,8 @@
 
                     for (let i = 1; i <= num_paginas; i++) {
                         containerPaginas.append(
-                            '<li class="page-item"><a class="page-link" href="#" id="page-id-' + i + '">' + i + '</a></li>'
+                            '<li class="page-item"><a class="page-link" href="#" id="page-id-' + i + '" ' +
+                            'data-page="' + i + '">' + i + '</a></li>'
                         );
                     }
                 }
@@ -40,13 +41,15 @@
 
                 data.lista.forEach(function (item) {
                     containerFontes.append(
-                        '<div class="col-md-3"><a href="#select" class="fonte-item">' + item + '</a></div>'
+                        '<div class="col-md-3"><a href="#select" class="fonte-item" data-toggle="tooltip" ' +
+                        'data-placement="top" title="' + item.noticia__fonte__count + ' noticia(s)">' +
+                        item.noticia__fonte + '</a></div>'
                     );
                 });
+
             });
         }
-
         // Preenche a lista da primeira página
-        page_click(1);
+        page_click('1');
     });
 })(jQuery);
