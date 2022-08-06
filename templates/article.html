@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}LARHUD Ibict - Timeline {{ object|capfirst }}{% endblock %}
+{% block content %}
+    <section class="container descricao">
+    {{ article.content|safe }}
+    </section>
+{% endblock %}
