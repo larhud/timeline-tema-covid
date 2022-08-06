@@ -29,34 +29,6 @@
             <img src="{% static "site/img/logoIbict.png" %}" alt="" />
         </a>
         <div class="d-flex align-items-center">
-          <div class="pesquisa d-md-none">
-            <form class="search-container">
-              <input
-                id="search-box"
-                type="text"
-                class="search-box"
-                placeholder="Buscar"
-                name="q"
-              />
-              <label for="search-box">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M19 19L14.65 14.65M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"
-                    stroke="#101828"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </label>
-            </form>
-          </div>
           <button
             class="navbar-toggler"
             type="button"
@@ -285,11 +257,11 @@
               <a href="https://www.youtube.com/channel/UC-MNEY-O0GOvkUD7NgR6Btg" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i></a>
             </div>
           </div>
-          <div class="formulario"><form action="/contato">
+          <div class="formulario"><form action="/mensagem/" method="GET">
             <div class="row mb-3">
               <div class="col-md-6 mb-3 mb-md-0">
                 <label for="">Nome</label>
-                <input type="text" class="form-control" placeholder="nome" id="id_nome"/>
+                <input type="text" class="form-control" placeholder="Informe seu nome" id="id_nome"/>
               </div>
             </div>
             <div class="row mb-3 mb-3 mb-md-0">

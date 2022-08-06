@@ -3,6 +3,7 @@
 {% block title %}LARHUD Ibict - Timeline {{ object|capfirst }}{% endblock %}
 {% block content %}
     <section class="container descricao">
+    <h2>{{ article.title }}</h2>
     {{ article.content|safe }}
     </section>
 {% endblock %}
