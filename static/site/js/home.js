@@ -7,43 +7,50 @@ $(function () {
           titulo: "COVID",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "/media/uploads/time1.png",
+          imagem: "time1.png",
+          slug: "covid",
         },
         {
           titulo: "Dilma Roussef",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "/media/uploads/time2.png",
+          imagem: "time2.png",
+          slug: "dilma",
         },
         {
           titulo: "Timeline 1",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "/media/uploads/time1.png",
+          imagem: "time1.png",
+          slug: "covid",
         },
         {
           titulo: "Timeline 2",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "/media/uploads/time1.png",
+          imagem: "time1.png",
+          slug: "covid",
         },
         {
           titulo: "COVID",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "/media/uploads/time1.png",
+          imagem: "time1.png",
+          slug: "covid",
         },
         {
           titulo: "Dilma Roussef",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "/media/uploads/time1.png",
+          imagem: "time1.png",
+          slug: "dilma",
         },
         {
           titulo: "Timeline 2",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "/media/uploads/time1.png",
+          imagem: "time1.png",
+          slug: "dilma",
         },
       ],
       locator: "items",
@@ -65,13 +72,13 @@ $(function () {
 
         $.each(response, function (index, item) {
           dataHtml +=
-            "<div class='item'><img src='img/" +
+            "<div class='item'><img src='/media/uploads/" +
             item.imagem +
             "' /><div class='conteudo'><h4>" +
             item.titulo +
             "</h4>";
           dataHtml += "<p>" + item.texto + "</p>";
-          dataHtml += `<a href="#">Acessar timeline <i class="fa-solid fa-arrow-right"></i></a></div></div>`;
+          dataHtml += `<a href=/timeline/` + item.slug + `>Acessar timeline <i class="fa-solid fa-arrow-right"></i></a></div></div>`;
         });
 
         dataHtml += "</div>";
