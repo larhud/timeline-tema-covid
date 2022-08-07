@@ -7,49 +7,43 @@ $(function () {
           titulo: "COVID",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "time1.png",
+          imagem: "/media/uploads/time1.png",
         },
         {
           titulo: "Dilma Roussef",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "time2.png",
+          imagem: "/media/uploads/time2.png",
         },
         {
           titulo: "Timeline 1",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "time1.png",
+          imagem: "/media/uploads/time1.png",
         },
         {
           titulo: "Timeline 2",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "time1.png",
+          imagem: "/media/uploads/time1.png",
         },
         {
           titulo: "COVID",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "time1.png",
+          imagem: "/media/uploads/time1.png",
         },
         {
           titulo: "Dilma Roussef",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "time1.png",
-        },
-        {
-          titulo: "Timeline 1",
-          texto:
-            "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "time1.png",
+          imagem: "/media/uploads/time1.png",
         },
         {
           titulo: "Timeline 2",
           texto:
             "Linha cronológica (timeline) de informações midiáticas sobre a COVID-19.  O objetivo é produzir...",
-          imagem: "time1.png",
+          imagem: "/media/uploads/time1.png",
         },
       ],
       locator: "items",
