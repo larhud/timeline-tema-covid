@@ -181,8 +181,21 @@ async function getJson(api_url) {
 }
 
 async function carregaTimeLine(data) {
-    document.getElementById('timeline-embed').innerHTML = '';
-    window.timeline = new TL.Timeline('timeline-embed', data);
+    let element = document.getElementById('timeline-embed');
+
+    element.innerHTML = '';
+
+    if (data.events.length) {
+        window.timeline = new TL.Timeline('timeline-embed', data, {language: 'pt-br'});
+    } else {
+        let template = document.createElement('template');
+
+        template.innerHTML = '<div class="tl-message-full"><div class="tl-message-container">' +
+            '<div class="tl-loading-icon"></div><div class="tl-message-content">' +
+            'Nenhuma notícia encontrada com esse critério de busca</div></div></div>';
+
+        element.appendChild(template.content);
+    }
 }
 
 async function carregaCloudWords(data) {
