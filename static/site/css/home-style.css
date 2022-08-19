@@ -106,7 +106,7 @@ p {
   background: #eff5ff;
   border: 2px solid #0075ff;
   border-radius: 50%;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
 }
 .banner .anos .item:first-child {
   align-items: flex-start;
