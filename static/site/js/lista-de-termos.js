@@ -1,7 +1,14 @@
 (function () {
     $(document).ready(function () {
+        function scrollToElement(el) {
+            if (window.matchMedia("(max-width: 810px)").matches) {
+                $('html').animate({scrollTop: (el.offset().top)}, 500);
+            }
+        }
+
         function initPaginator(name, order = 'pk') {
             let container = $("#pagination-" + name);
+            let dataContainer = $("#item-container-" + name);
 
             container.pagination({
                 locator: "items",
@@ -18,6 +25,15 @@
                 prevText: '<i class="fa-solid fa-arrow-left"></i> Anterior',
                 showFirstOnEllipsisShow: true,
                 showLastOnEllipsisShow: true,
+                afterPreviousOnClick: function () {
+                    scrollToElement(dataContainer);
+                },
+                afterNextOnClick: function () {
+                    scrollToElement(dataContainer);
+                },
+                afterPageOnClick: function () {
+                    scrollToElement(dataContainer);
+                },
                 ajax: {
                     beforeSend: function () {
                         container.prev().html("Loading data...");
@@ -50,12 +66,3 @@
         selectOrdem.trigger('change');
     });
 })(jQuery);
-
-var swiper = new Swiper(".mySwiper", {
-    slidesPerView: "auto",
-    spaceBetween: 30,
-    pagination: {
-        el: ".swiper-pagination",
-        paginationClickable: true
-    },
-});
