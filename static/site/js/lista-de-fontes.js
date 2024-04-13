@@ -11,9 +11,9 @@
 
         containerFontes.on('click', '.fonte-item', function () {
             // Atribui a seleção no campo de filtro de veículo
-            $('#veiculo').val($(this).text());
+            $('#btn-fonte').val($(this).text());
             // Fecha a lista
-            $('#btn-fonte').click();
+            // $('#btn-fonte').click();
             // Executa a busca
             $('#btn-busca').click();
         });
