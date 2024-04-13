@@ -35,65 +35,66 @@
             <input type="hidden" name="ano_mes_1" id="mes-busca">
             {% block hidden_inputs %}
             {% endblock %}
-        </form>
+            <div id="busca-avancada" class="">
+                <div class="collapse show" id="collapseExample">
+                    <div class="row mt-1 d-flex align-items-center">
 
 
-        <div id="busca-avancada" class="">
-            <div class="collapse show" id="collapseExample">
-                <div class="row mt-1 d-flex align-items-center">
+                        <div class="col-md-5">
+                            <input type="text" id="dataFiltro" class="form-control" name="datafiltro"
+                                placeholder="Busca por data">
+                        </div>
 
+                        <div class="col-md-5 position-relative">
+                            <input type="text" name="veiculo" placeholder="Veículo de Comunicação" id="btn-fonte"
+                                class="form-control">
+                            <button type="button" class="btn btn-primary position-absolute top-0 end-0 btn-tabela"
+                                style="height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                                data-bs-toggle="collapse" href="#collapseFonte" role="button" aria-expanded="false"
+                                aria-controls="collapseFonte" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                title="Clique para visualizar os veículos existentes">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="2" y="3" width="16" height="14" stroke="currentColor" stroke-width="2">
+                                    </rect>
+                                    <line x1="2" y1="7" x2="18" y2="7" stroke="currentColor" stroke-width="2"></line>
+                                    <line x1="6" y1="3" x2="6" y2="17" stroke="currentColor" stroke-width="2"></line>
+                                </svg>
+                            </button>
+                        </div>
 
-                    <div class="col-md-5">
-                        <input type="text" id="dataFiltro" class="form-control" name="datafiltro"
-                            placeholder="Busca por data">
-                    </div>
+                        <div class="col-md-1 d-flex justify-content-end">
+                            <a id="cronocloud" href="#" class="btn btn-primary w-100 mt-1 mb-1" title="Nuvem Temporal"
+                                role="button">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path
+                                        d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                                </svg>
+                            </a>
+                        </div>
 
-                    <div class="col-md-5 position-relative">
-                        <input type="text" name="veiculo" placeholder="Veículo de Comunicação" id="btn-fonte"
-                            class="form-control">
-                        <button type="button" class="btn btn-primary position-absolute top-0 end-0 btn-tabela"
-                            style="height: 100%; border-top-left-radius: 0; border-bottom-left-radius: 0;"
-                            data-bs-toggle="collapse" href="#collapseFonte" role="button" aria-expanded="false"
-                            aria-controls="collapseFonte" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            title="Clique para visualizar os veículos existentes">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <rect x="2" y="3" width="16" height="14" stroke="currentColor" stroke-width="2"></rect>
-                                <line x1="2" y1="7" x2="18" y2="7" stroke="currentColor" stroke-width="2"></line>
-                                <line x1="6" y1="3" x2="6" y2="17" stroke="currentColor" stroke-width="2"></line>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <div class="col-md-1 d-flex justify-content-end">
-                        <a id="cronocloud" href="#" class="btn btn-primary w-100 mt-1 mb-1" title="Nuvem Temporal"
-                            role="button">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path
-                                    d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
-                            </svg>
-                        </a>
-                    </div>
-
-                    <div class="col-md-1 d-flex justify-content-end">
-                        <button class="btn btn-primary w-100 mt-1 mb-1" id="btn-download" data-bs-toggle="tooltip"
-                            data-bs-placement="bottom" data-bs-html="true"
-                            title="Download <p>Baixe o dataset com os resultados da pesquisa realizada.</p>">
-                            <svg width="23" height="24" viewBox="0 0 23 24" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.8643 4.5V15.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M16.6102 10.5L11.8644 15.5L7.11865 10.5" stroke="#FFFFFF" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M18.5085 19.5H5.22034" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </button>
+                        <div class="col-md-1 d-flex justify-content-end">
+                            <button class="btn btn-primary w-100 mt-1 mb-1" id="btn-download" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom" data-bs-html="true"
+                                title="Download <p>Baixe o dataset com os resultados da pesquisa realizada.</p>">
+                                <svg width="23" height="24" viewBox="0 0 23 24" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.8643 4.5V15.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M16.6102 10.5L11.8644 15.5L7.11865 10.5" stroke="#FFFFFF" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M18.5085 19.5H5.22034" stroke="#FFFFFF" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
+
+
         <div id="fontes-noticia">
             <div class="collapse borda p-3" id="collapseFonte">
                 <div class="row" id="lista-de-fontes"></div>
