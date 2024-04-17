@@ -198,10 +198,33 @@ async function carregaTimeLine(data) {
     }
 }
 
+async function carregarCronoCloud(requestData) {
+    let data = requestData.cronocloud;
+
+    var headers = data.header?.map(function(header) {
+        return "<th>" + header + "</th>";
+    });
+    $("#tableHeaders").html(headers);
+    $("#tableBody").empty();
+    // Adiciona as linhas da tabela
+    data.rows?.forEach(function(row) {
+        var termosList = "<ul>"; // Inicia a lista não ordenada
+        row.termos.forEach(function(termo) {
+            termosList += "<li>" + termo + " " + "</li>"; // Adiciona cada termo como um item de lista
+        });
+        termosList += "</ul>"; // Fecha a lista não ordenada
+        var rowData = "<tr><td>" + row.dt_inicial + "</td><td>" + row.dt_final + "</td><td class='termos'>" + termosList + "</td></tr>";
+        $("#tableBody").append(rowData);
+    });
+}
+
+
 async function carregaCloudWords(data) {
+    let wordCloud = data['wordcloud'];
+
     $('#palavras').jQCloud('destroy');
 
-    $("#palavras").jQCloud(data, {
+    $("#palavras").jQCloud(wordCloud, {
         // fontSize: function (width, height, step) {
         //   if (step == 1) return width * 0.005 * step + "px";
 
@@ -250,56 +273,58 @@ async function carregaMesAno(data) {
     }
 }
 
-function consideraBuscaAvancada() {
-    // Move a div collapseExample para dentro do form quando vísivel para que os inputs dessa div
-    // sejam enviados na pesquisa
-    let container = document.getElementById('collapseExample');
+// function consideraBuscaAvancada() {
+//     // Move a div collapseExample para dentro do form quando vísivel para que os inputs dessa div
+//     // sejam enviados na pesquisa
+//     let container = document.getElementById('collapseExample');
 
-    if (container.classList.contains('show')) {
-        let divBuscaAvancadaForm = document.getElementById('busca-avancada-form');
-        divBuscaAvancadaForm.appendChild(container);
-    } else {
-        let divBuscaAvancada = document.getElementById('busca-avancada');
-        divBuscaAvancada.appendChild(container);
-    }
-}
+//     if (container.classList.contains('show')) {
+//         let divBuscaAvancadaForm = document.getElementById('busca-avancada-form');
+//         divBuscaAvancadaForm.appendChild(container);
+//     } else {
+//         let divBuscaAvancada = document.getElementById('busca-avancada');
+//         divBuscaAvancada.appendChild(container);
+//     }
+// }
 
 async function buscaMesAno() {
-    consideraBuscaAvancada();
+    // consideraBuscaAvancada();
     let data = await getJson(window.url_pesquisa);
     carregaTimeLine(data);
-    let cloudWordsData = await getJson(window.url_nuvem_de_palavras);
-    carregaCloudWords(cloudWordsData);
+    atualizaNuvem();
 }
 
 async function buscaPrincipal() {
     document.getElementById('ano-busca').value = '';
     document.getElementById('mes-busca').value = '';
-    consideraBuscaAvancada();
+    // consideraBuscaAvancada();
     let data = await getJson(window.url_pesquisa);
     carregaTimeLine(data);
     carregaMesAno(data);
-    let cloudWordsData = await getJson(window.url_nuvem_de_palavras);
-    carregaCloudWords(cloudWordsData);
+    atualizaNuvem();
+}
+
+async function buscaIncial() {
+    document.getElementById('ano-busca').value = '';
+    document.getElementById('mes-busca').value = '';    
+    let data = await getJson(window.url_pesquisa);
+    carregaTimeLine(data);
+    carregaMesAno(data);    
 }
 
 let btnBusca = document.getElementById('btn-busca');
-let btnBuscaAvancada = document.getElementById('btn-avancada');
 let btnDownload = document.getElementById('btn-download');
 let btnFonte = document.getElementById('btn-fonte');
+let cloudButton = document.getElementById("cronocloud");
 
 btnBusca.addEventListener('click', function (e) {
     e.preventDefault();
     buscaPrincipal();
 });
 
-btnBuscaAvancada.addEventListener('click', function (e) {
-    e.preventDefault();
-});
-
 btnDownload.addEventListener('click', function (e) {
     e.preventDefault();
-    consideraBuscaAvancada();
+    // consideraBuscaAvancada();
     let formData = new FormData(document.getElementById('form-busca'));
     let urlParams = new URLSearchParams(formData);
     window.location = '/arquivo_json' + '?' + urlParams.toString();
@@ -311,7 +336,7 @@ btnFonte.addEventListener('click', function (e) {
 });
 
 window.addEventListener("load", function () {
-    buscaPrincipal();
+    buscaIncial();
 });
 
 document.addEventListener('keydown', function (e) {
@@ -320,4 +345,28 @@ document.addEventListener('keydown', function (e) {
     if (key === 'Enter' || key === 13) {
         btnBusca.click();
     }
+});
+
+async function atualizaNuvem() {
+  let cloudWordsData = await getJson(window.url_nuvem_de_palavras);
+  carregaCloudWords(cloudWordsData);
+  carregarCronoCloud(cloudWordsData);
+}
+
+cloudButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  let timelineSection = $("#timeline-section");
+  let nuvemSection = $("#nuvem-section");
+  let nuvemCronoSection = $("#crono-nuvem-section");
+
+  if (timelineSection.is(":visible")) {
+    timelineSection.hide();
+    nuvemSection.show();
+    nuvemCronoSection.show();
+    atualizaNuvem();
+  } else {
+    timelineSection.show();
+    nuvemSection.hide();
+    nuvemCronoSection.hide();
+  }
 });
