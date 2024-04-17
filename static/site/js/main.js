@@ -304,7 +304,7 @@ async function buscaPrincipal() {
     atualizaNuvem();
 }
 
-async function buscaIncial() {
+async function buscaInicial() {
     document.getElementById('ano-busca').value = '';
     document.getElementById('mes-busca').value = '';    
     let data = await getJson(window.url_pesquisa);
@@ -336,7 +336,7 @@ e.preventDefault();
 });
 
 window.addEventListener("load", function () {
-    buscaIncial();
+    buscaInicial();
 });
 
 document.addEventListener('keydown', function (e) {
