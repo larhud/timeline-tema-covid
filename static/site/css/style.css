@@ -41,6 +41,7 @@ body {
   padding: 10px 10px;
   border-bottom: 2px solid transparent;
 }
+
 @media screen and (min-width: 1387px) {
   .navbar-expand-xl .navbar-nav .nav-link {
     margin: 0 10px;
