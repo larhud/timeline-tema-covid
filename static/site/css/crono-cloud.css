@@ -2,10 +2,13 @@
     padding-left: 0%;
     margin: auto;
 }
+#crono-nuvem-section table{
+    font-size: 12px;
+}
 
 .termos ul li{
     display: inline;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 li:nth-child(1){

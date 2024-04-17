@@ -233,7 +233,7 @@ async function carregaCloudWords(data) {
         width: 500,
         delayedMode: false,
         autoResize: true,
-        colors: ["#244CB2", "#2670E8", "#0075FF", "#0FCEFF", "#7B61FF", "#667085"],
+        colors: ["#244CB2", "#2670E8", "#1A759F", "#168AAD", "#34A0A4", "#52B69A", "#76C893", "#99D98C", "#B5E48C", "#D9ED92" ],
     });
 }
 
@@ -347,8 +347,25 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
+function showLoadingIndicator() {
+    $('#palavras').hide();
+    $('#crono-nuvem-section').hide();
+
+    $("#loadingIndicator").addClass('d-flex');
+}
+
+function hideLoadingIndicator() {
+    $("#loadingIndicator").removeClass('d-flex');
+    $("#loadingIndicator").hide();
+
+    $("#palavras").show();
+    $('#crono-nuvem-section').show();
+}
+
 async function atualizaNuvem() {
+  showLoadingIndicator();
   let cloudWordsData = await getJson(window.url_nuvem_de_palavras);
+  hideLoadingIndicator();
   carregaCloudWords(cloudWordsData);
   carregarCronoCloud(cloudWordsData);
 }

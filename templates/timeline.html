@@ -190,6 +190,12 @@
                 height="700px" width="100%"></iframe -->
 </section>
 <div class="d-flex justify-content-center align-items-center">
+    <div id="loadingIndicator" class="text-center mb-3 d-flex justify-content-center align-items-center"
+        style="height: 300px;">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     <section class="nuvem" id="nuvem-section" style="display: none;">
         <div class="container d-flex justify-content-center">
             <div id="palavras"></div>
@@ -197,7 +203,7 @@
     </section>
     <section id="crono-nuvem-section" style="display: none;">
         <div class="container d-flex justify-content-center">
-            <table class="table">
+            <table class="table table-sm">
                 <thead>
                     <tr id="tableHeaders">
 
