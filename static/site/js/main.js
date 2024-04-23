@@ -237,6 +237,31 @@ async function carregaCloudWords(data) {
     });
 }
 
+function carregaGrafico(data) {
+    const trace1 = {
+        type: 'bar',
+        x: data.x,
+        y: data.y,
+        marker: {
+            color: '244CB2',
+            
+        },
+        xaxis: {title: 'Data'},
+        yaxis: {title: 'Notícias'},
+    };
+
+    const dataPlot = [trace1];
+    let total = data.total;
+
+    const layout = {
+        title: `Estatística Diária - Total de notícias: ${total}`,
+        font: { size: 15 }
+    };
+
+    const config = { responsive: true }
+    Plotly.newPlot('stats-section', dataPlot, layout, config);
+}
+
 async function carregaMesAno(data) {
   let ulAno = document.getElementById('ul-ano');
   let container = document.getElementById('container-ano-mes');
@@ -292,6 +317,7 @@ async function buscaMesAno() {
     let data = await getJson(window.url_pesquisa);
     carregaTimeLine(data);
     atualizaNuvem();
+    atualizaGrafico();
 }
 
 async function buscaPrincipal() {
@@ -302,9 +328,11 @@ async function buscaPrincipal() {
     carregaTimeLine(data);
     carregaMesAno(data);
     atualizaNuvem();
+    atualizaGrafico();
 }
 
 async function buscaInicial() {
+    hideLoadingIndicator();
     document.getElementById('ano-busca').value = '';
     document.getElementById('mes-busca').value = '';    
     let data = await getJson(window.url_pesquisa);
@@ -316,6 +344,7 @@ let btnBusca = document.getElementById('btn-busca');
 let btnDownload = document.getElementById('btn-download');
 let btnFonte = document.getElementById('btn-fonte');
 let cloudButton = document.getElementById("cronocloud");
+let statsButton = document.getElementById("stats");
 
 btnBusca.addEventListener('click', function (e) {
     e.preventDefault();
@@ -370,20 +399,58 @@ async function atualizaNuvem() {
   carregarCronoCloud(cloudWordsData);
 }
 
-cloudButton.addEventListener("click", function (e) {
-  e.preventDefault();
-  let timelineSection = $("#timeline-section");
-  let nuvemSection = $("#nuvem-section");
-  let nuvemCronoSection = $("#crono-nuvem-section");
+async function atualizaGrafico() {
+    const graficoData = await getJson(window.url_grafico);
+    carregaGrafico(graficoData);
+}
 
-  if (timelineSection.is(":visible")) {
-    timelineSection.hide();
-    nuvemSection.show();
-    nuvemCronoSection.show();
-    atualizaNuvem();
-  } else {
-    timelineSection.show();
-    nuvemSection.hide();
-    nuvemCronoSection.hide();
-  }
+cloudButton.addEventListener("click", function (e) {
+    e.preventDefault();
+        let timelineSection = $("#timeline-section");
+        let statsSection = $("#stats-section");
+        let nuvemSection = $("#nuvem-section");
+        let nuvemCronoSection = $("#crono-nuvem-section");
+
+        if (nuvemSection.is(":visible")) {
+            // Se a nuvem já estiver visível, oculta todas as seções
+            timelineSection.show();
+            statsSection.hide();
+            nuvemSection.hide();
+            nuvemCronoSection.hide();
+            cloudButton.classList.remove("btn-clicked");
+        } else {
+            // Se a nuvem estiver oculta, mostra apenas a nuvem e a seção de nuvem cronometrada
+            cloudButton.classList.add("btn-clicked");
+            timelineSection.hide();
+            statsSection.hide();
+            nuvemSection.show();
+            nuvemCronoSection.show();
+            atualizaNuvem(); // Suponho que você tenha uma função chamada atualizaNuvem para atualizar a nuvem
+        }
+});
+
+statsButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        let timelineSection = $("#timeline-section");
+        let statsSection = $("#stats-section");
+        let nuvemSection = $("#nuvem-section");
+        let nuvemCronoSection = $("#crono-nuvem-section");
+
+        if (statsSection.is(":visible")) {
+            // Se a nuvem já estiver visível, oculta todas as seções
+            timelineSection.show();
+            statsSection.hide();
+            nuvemSection.hide();
+            nuvemCronoSection.hide();
+            statsButton.classList.remove("btn-clicked");
+        } else {
+            // Se a nuvem estiver oculta, mostra apenas a nuvem e a seção de nuvem cronometrada
+            timelineSection.hide();
+            statsSection.show();
+            statsButton.classList.add("btn-clicked");         
+            nuvemSection.hide();
+            nuvemCronoSection.hide();            
+            atualizaGrafico();
+        }
+
 });
