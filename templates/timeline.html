@@ -240,7 +240,7 @@
 
 {% block js %}
 {{ block.super }}
-<script src='https://cdn.plot.ly/plotly-2.31.1.min.js'></script>
+<script src='{{ STATIC_URL }}site/js/plotly-2.31.1.min.js'></script>
 <script src="{{ STATIC_URL }}site/js/jqcloud.min.js"></script>
 <script type="text/javascript">
     window.url_pesquisa = "{% url 'pesquisa' %}";
