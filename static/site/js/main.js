@@ -201,19 +201,19 @@ async function carregaTimeLine(data) {
 async function carregarCronoCloud(requestData) {
     let data = requestData.cronocloud;
 
-    var headers = data.header?.map(function(header) {
+    let headers = data.header?.map(function(header) {
         return "<th>" + header + "</th>";
     });
     $("#tableHeaders").html(headers);
     $("#tableBody").empty();
     // Adiciona as linhas da tabela
     data.rows?.forEach(function(row) {
-        var termosList = "<ul>"; // Inicia a lista não ordenada
+        let termosList = "<ul>"; // Inicia a lista não ordenada
         row.termos.forEach(function(termo) {
             termosList += "<li>" + termo + " " + "</li>"; // Adiciona cada termo como um item de lista
         });
         termosList += "</ul>"; // Fecha a lista não ordenada
-        var rowData = "<tr><td>" + row.dt_inicial + "</td><td>" + row.dt_final + "</td><td class='termos'>" + termosList + "</td></tr>";
+        let rowData = "<tr><td>" + row.dt_inicial + "</td><td>" + row.dt_final + "</td><td class='termos'>" + termosList + "</td></tr>";
         $("#tableBody").append(rowData);
     });
 }
@@ -248,6 +248,7 @@ function carregaGrafico(data) {
         },
         xaxis: {title: 'Data'},
         yaxis: {title: 'Notícias'},
+        xtimezone: "America/Fortaleza"
     };
 
     const dataPlot = [trace1];
@@ -298,22 +299,7 @@ async function carregaMesAno(data) {
   }
 }
 
-// function consideraBuscaAvancada() {
-//     // Move a div collapseExample para dentro do form quando vísivel para que os inputs dessa div
-//     // sejam enviados na pesquisa
-//     let container = document.getElementById('collapseExample');
-
-//     if (container.classList.contains('show')) {
-//         let divBuscaAvancadaForm = document.getElementById('busca-avancada-form');
-//         divBuscaAvancadaForm.appendChild(container);
-//     } else {
-//         let divBuscaAvancada = document.getElementById('busca-avancada');
-//         divBuscaAvancada.appendChild(container);
-//     }
-// }
-
-async function buscaMesAno() {
-    // consideraBuscaAvancada();
+async function buscaMesAno() {    
     let data = await getJson(window.url_pesquisa);
     carregaTimeLine(data);
     atualizaNuvem();
@@ -322,8 +308,7 @@ async function buscaMesAno() {
 
 async function buscaPrincipal() {
     document.getElementById('ano-busca').value = '';
-    document.getElementById('mes-busca').value = '';
-    // consideraBuscaAvancada();
+    document.getElementById('mes-busca').value = '';    
     let data = await getJson(window.url_pesquisa);
     carregaTimeLine(data);
     carregaMesAno(data);
@@ -343,8 +328,7 @@ async function buscaInicial() {
 let btnBusca = document.getElementById('btn-busca');
 let btnDownload = document.getElementById('btn-download');
 let btnFonte = document.getElementById('btn-fonte');
-let cloudButton = document.getElementById("cronocloud");
-let statsButton = document.getElementById("stats");
+
 
 btnBusca.addEventListener('click', function (e) {
     e.preventDefault();
@@ -392,9 +376,9 @@ function hideLoadingIndicator() {
 }
 
 async function atualizaNuvem() {
-  showLoadingIndicator();
+//   showLoadingIndicator();
   let cloudWordsData = await getJson(window.url_nuvem_de_palavras);
-  hideLoadingIndicator();
+//   hideLoadingIndicator();
   carregaCloudWords(cloudWordsData);
   carregarCronoCloud(cloudWordsData);
 }
@@ -404,53 +388,60 @@ async function atualizaGrafico() {
     carregaGrafico(graficoData);
 }
 
-cloudButton.addEventListener("click", function (e) {
-    e.preventDefault();
-        let timelineSection = $("#timeline-section");
-        let statsSection = $("#stats-section");
-        let nuvemSection = $("#nuvem-section");
-        let nuvemCronoSection = $("#crono-nuvem-section");
+const botoesControle = [
+    $("#cronocloud"), 
+    $("#stats")
+];
 
-        if (nuvemSection.is(":visible")) {
-            // Se a nuvem já estiver visível, oculta todas as seções
-            timelineSection.show();
-            statsSection.hide();
-            nuvemSection.hide();
-            nuvemCronoSection.hide();
-            cloudButton.classList.remove("btn-clicked");
-        } else {
-            // Se a nuvem estiver oculta, mostra apenas a nuvem e a seção de nuvem cronometrada
-            cloudButton.classList.add("btn-clicked");
-            timelineSection.hide();
-            statsSection.hide();
-            nuvemSection.show();
-            nuvemCronoSection.show();
-            atualizaNuvem(); // Suponho que você tenha uma função chamada atualizaNuvem para atualizar a nuvem
-        }
-});
+let activeSection = ""; // Variável para armazenar a seção ativa
 
-statsButton.addEventListener("click", function (e) {
+botoesControle.forEach(function(button) {
+    button.click(function(e) {
         e.preventDefault();
         let timelineSection = $("#timeline-section");
         let statsSection = $("#stats-section");
         let nuvemSection = $("#nuvem-section");
         let nuvemCronoSection = $("#crono-nuvem-section");
 
-        if (statsSection.is(":visible")) {
-            // Se a nuvem já estiver visível, oculta todas as seções
-            timelineSection.show();
-            statsSection.hide();
-            nuvemSection.hide();
-            nuvemCronoSection.hide();
-            statsButton.classList.remove("btn-clicked");
-        } else {
-            // Se a nuvem estiver oculta, mostra apenas a nuvem e a seção de nuvem cronometrada
-            timelineSection.hide();
-            statsSection.show();
-            statsButton.classList.add("btn-clicked");         
-            nuvemSection.hide();
-            nuvemCronoSection.hide();            
-            atualizaGrafico();
+        if (button.attr("id") === "cronocloud") {
+            if (activeSection === "cloud") {
+                // Se a seção nuvem já estiver ativa, oculta todas as seções
+                timelineSection.show();
+                statsSection.hide();
+                nuvemSection.hide();
+                nuvemCronoSection.hide();
+                activeSection = ""; // Remove a seção ativa
+                button.removeClass("btn-clicked"); // Remove a classe de botão clicado
+            } else {
+                // Se a seção nuvem estiver inativa, mostra apenas a nuvem e a seção de nuvem cronometrada
+                timelineSection.hide();
+                statsSection.hide();
+                nuvemSection.show();
+                nuvemCronoSection.show();
+                atualizaNuvem(); // Suponho que você tenha uma função chamada atualizaNuvem para atualizar a nuvem
+                activeSection = "cloud"; // Define a seção nuvem como ativa
+                button.addClass("btn-clicked"); // Adiciona a classe de botão clicado
+                $("#stats").removeClass("btn-clicked"); // Remove a classe de botão clicado do botão de estatísticas
+            }
+        } else if (button.attr("id") === "stats") {
+            if (activeSection === "stats") {
+                // Se a seção de estatísticas já estiver ativa, mostra apenas a linha do tempo
+                timelineSection.show();
+                statsSection.hide();
+                activeSection = ""; // Remove a seção ativa
+                button.removeClass("btn-clicked"); // Remove a classe de botão clicado
+               
+            } else {
+                // Se a seção de estatísticas estiver inativa, mostra apenas as estatísticas
+                nuvemSection.hide();
+                timelineSection.hide();
+                nuvemCronoSection.hide();
+                statsSection.show();
+                activeSection = "stats"; // Define a seção de estatísticas como ativa
+                atualizaGrafico();
+                button.addClass("btn-clicked"); // Adiciona a classe de botão clicado
+                $("#cronocloud").removeClass("btn-clicked"); // Remove a classe de botão clicado do botão de nuvem
+            }
         }
-
+    });
 });
