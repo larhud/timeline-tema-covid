@@ -42,6 +42,10 @@ body {
   border-bottom: 2px solid transparent;
 }
 
+.btn-clicked{
+  box-shadow: inset 0px 5px 36px 0px rgba(0, 0, 0, 0.60);
+}
+
 @media screen and (min-width: 1387px) {
   .navbar-expand-xl .navbar-nav .nav-link {
     margin: 0 10px;
