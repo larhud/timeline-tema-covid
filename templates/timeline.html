@@ -2,6 +2,10 @@
 {% load static %}
 
 {% block title %}LARHUD ibict - Timeline {{ object|capfirst }}{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'site/css/crono-cloud.css' %}">
+
+{% endblock %}
 {% block content %}
 <section class="container descricao">
     {% block termo_descricao %}
@@ -40,12 +44,12 @@
                     <div class="row mt-1 d-flex align-items-center">
 
 
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <input type="text" id="dataFiltro" class="form-control" name="datafiltro"
                                 placeholder="Busca por data">
                         </div>
 
-                        <div class="col-md-6 position-relative">
+                        <div class="col-md-5 position-relative">
                             <input type="text" name="veiculo" placeholder="Veículo de Comunicação" id="btn-fonte"
                                 class="form-control">
                             <button type="button" class="btn btn-primary position-absolute top-0 end-0 btn-tabela"
@@ -185,11 +189,32 @@
                 src="https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1xuY4upIooEeszZ_lCmeNx24eSFWe0rHe9ZdqH2xqVNk&amp;font=Default&amp;lang=en&amp;initial_zoom=2&amp;height=100%"
                 height="700px" width="100%"></iframe -->
 </section>
-<section class="nuvem" id="nuvem-section" style="display: none;">
-    <div class="container d-flex justify-content-center">
-        <div id="palavras"></div>
+<div class="d-flex justify-content-center align-items-center">
+    <div id="loadingIndicator" class="text-center mb-3 d-flex justify-content-center align-items-center"
+        style="height: 300px;">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
-</section>
+    <section class="nuvem" id="nuvem-section" style="display: none;">
+        <div class="container d-flex justify-content-center">
+            <div id="palavras"></div>
+        </div>
+    </section>
+    <section id="crono-nuvem-section" style="display: none;">
+        <div class="container d-flex justify-content-center">
+            <table class="table table-sm">
+                <thead>
+                    <tr id="tableHeaders">
+
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
 {% endblock %}
 
 {% block js %}

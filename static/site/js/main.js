@@ -198,20 +198,43 @@ async function carregaTimeLine(data) {
   }
 }
 
+async function carregarCronoCloud(requestData) {
+    let data = requestData.cronocloud;
+
+    var headers = data.header?.map(function(header) {
+        return "<th>" + header + "</th>";
+    });
+    $("#tableHeaders").html(headers);
+    $("#tableBody").empty();
+    // Adiciona as linhas da tabela
+    data.rows?.forEach(function(row) {
+        var termosList = "<ul>"; // Inicia a lista não ordenada
+        row.termos.forEach(function(termo) {
+            termosList += "<li>" + termo + " " + "</li>"; // Adiciona cada termo como um item de lista
+        });
+        termosList += "</ul>"; // Fecha a lista não ordenada
+        var rowData = "<tr><td>" + row.dt_inicial + "</td><td>" + row.dt_final + "</td><td class='termos'>" + termosList + "</td></tr>";
+        $("#tableBody").append(rowData);
+    });
+}
+
+
 async function carregaCloudWords(data) {
-  $('#palavras').jQCloud('destroy');
+    let wordCloud = data['wordcloud'];
 
-  $("#palavras").jQCloud(data, {
-      // fontSize: function (width, height, step) {
-      //   if (step == 1) return width * 0.005 * step + "px";
+    $('#palavras').jQCloud('destroy');
 
-      //   return width * 0.005 * step + "px";
-      // },
-      width: 500,
-      delayedMode: false,
-      autoResize: true,
-      colors: ["#244CB2", "#2670E8", "#0075FF", "#0FCEFF", "#7B61FF", "#667085"],
-  });
+    $("#palavras").jQCloud(wordCloud, {
+        // fontSize: function (width, height, step) {
+        //   if (step == 1) return width * 0.005 * step + "px";
+
+        //   return width * 0.005 * step + "px";
+        // },
+        width: 500,
+        delayedMode: false,
+        autoResize: true,
+        colors: ["#244CB2", "#2670E8", "#1A759F", "#168AAD", "#34A0A4", "#52B69A", "#76C893", "#99D98C", "#B5E48C", "#D9ED92" ],
+    });
 }
 
 async function carregaMesAno(data) {
@@ -265,20 +288,28 @@ async function carregaMesAno(data) {
 // }
 
 async function buscaMesAno() {
-  // consideraBuscaAvancada();
-  let data = await getJson(window.url_pesquisa);
-  carregaTimeLine(data);
-  atualizaNuvem();
+    // consideraBuscaAvancada();
+    let data = await getJson(window.url_pesquisa);
+    carregaTimeLine(data);
+    atualizaNuvem();
 }
 
 async function buscaPrincipal() {
-  document.getElementById('ano-busca').value = '';
-  document.getElementById('mes-busca').value = '';
-  // consideraBuscaAvancada();
-  let data = await getJson(window.url_pesquisa);
-  carregaTimeLine(data);
-  carregaMesAno(data);
-  atualizaNuvem();
+    document.getElementById('ano-busca').value = '';
+    document.getElementById('mes-busca').value = '';
+    // consideraBuscaAvancada();
+    let data = await getJson(window.url_pesquisa);
+    carregaTimeLine(data);
+    carregaMesAno(data);
+    atualizaNuvem();
+}
+
+async function buscaInicial() {
+    document.getElementById('ano-busca').value = '';
+    document.getElementById('mes-busca').value = '';    
+    let data = await getJson(window.url_pesquisa);
+    carregaTimeLine(data);
+    carregaMesAno(data);    
 }
 
 let btnBusca = document.getElementById('btn-busca');
@@ -287,16 +318,16 @@ let btnFonte = document.getElementById('btn-fonte');
 let cloudButton = document.getElementById("cronocloud");
 
 btnBusca.addEventListener('click', function (e) {
-  e.preventDefault();
-  buscaPrincipal();
+    e.preventDefault();
+    buscaPrincipal();
 });
 
 btnDownload.addEventListener('click', function (e) {
-  e.preventDefault();
-  // consideraBuscaAvancada();
-  let formData = new FormData(document.getElementById('form-busca'));
-  let urlParams = new URLSearchParams(formData);
-  window.location = '/arquivo_json' + '?' + urlParams.toString();
+    e.preventDefault();
+    // consideraBuscaAvancada();
+    let formData = new FormData(document.getElementById('form-busca'));
+    let urlParams = new URLSearchParams(formData);
+    window.location = '/arquivo_json' + '?' + urlParams.toString();
 });
 
 btnFonte.addEventListener('click', function (e) {
@@ -305,33 +336,54 @@ e.preventDefault();
 });
 
 window.addEventListener("load", function () {
-  buscaPrincipal();
+    buscaInicial();
 });
 
 document.addEventListener('keydown', function (e) {
-  e.stopPropagation(); // **put this line in your code**
-  let key = e.key || e.keycode;
-  if (key === 'Enter' || key === 13) {
-      btnBusca.click();
-  }
+    e.stopPropagation(); // **put this line in your code**
+    let key = e.key || e.keycode;
+    if (key === 'Enter' || key === 13) {
+        btnBusca.click();
+    }
 });
 
+function showLoadingIndicator() {
+    $('#palavras').hide();
+    $('#crono-nuvem-section').hide();
+
+    $("#loadingIndicator").addClass('d-flex');
+}
+
+function hideLoadingIndicator() {
+    $("#loadingIndicator").removeClass('d-flex');
+    $("#loadingIndicator").hide();
+
+    $("#palavras").show();
+    $('#crono-nuvem-section').show();
+}
+
 async function atualizaNuvem() {
-let cloudWordsData = await getJson(window.url_nuvem_de_palavras);
-carregaCloudWords(cloudWordsData);
+  showLoadingIndicator();
+  let cloudWordsData = await getJson(window.url_nuvem_de_palavras);
+  hideLoadingIndicator();
+  carregaCloudWords(cloudWordsData);
+  carregarCronoCloud(cloudWordsData);
 }
 
 cloudButton.addEventListener("click", function (e) {
-e.preventDefault();
-let timelineSection = $("#timeline-section");
-let nuvemSection = $("#nuvem-section");
+  e.preventDefault();
+  let timelineSection = $("#timeline-section");
+  let nuvemSection = $("#nuvem-section");
+  let nuvemCronoSection = $("#crono-nuvem-section");
 
-if (timelineSection.is(":visible")) {
-  timelineSection.hide();
-  nuvemSection.show();
-  atualizaNuvem();
-} else {
-  timelineSection.show();
-  nuvemSection.hide();
-}
+  if (timelineSection.is(":visible")) {
+    timelineSection.hide();
+    nuvemSection.show();
+    nuvemCronoSection.show();
+    atualizaNuvem();
+  } else {
+    timelineSection.show();
+    nuvemSection.hide();
+    nuvemCronoSection.hide();
+  }
 });
