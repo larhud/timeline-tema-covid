@@ -198,7 +198,27 @@ async function carregaTimeLine(data) {
   }
 }
 
-async function carregarCronoCloud(requestData) {
+async function carregarCronoCloud(requestData, element) {
+    if (activeSection !== 'cloud') {
+        return
+    }
+
+    let template = document.createElement('template');
+    template.innerHTML = `
+       <section id="crono-nuvem-section">
+            <div class="container d-flex justify-content-center">
+                <table class="table table-sm">
+                    <thead>
+                        <tr id="tableHeaders"></tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </section>
+    `;    
+    element.appendChild(template.content);
+
+
     let data = requestData.cronocloud;
 
     let headers = data.header?.map(function(header) {
@@ -219,9 +239,22 @@ async function carregarCronoCloud(requestData) {
 }
 
 
-async function carregaCloudWords(data) {
-    let wordCloud = data['wordcloud'];
+async function carregaCloudWords(data, element) {
+    if (activeSection !== 'cloud') {
+        return;
+    }
 
+    let wordCloud = data['wordcloud'];
+    let template = document.createElement('template');
+    template.innerHTML = `
+        <section class="nuvem" id="nuvem-section">
+            <div class="container d-flex justify-content-center">
+                <div id="palavras"></div>
+            </div>
+        </section>
+    `;    
+    element.appendChild(template.content);
+    
     $('#palavras').jQCloud('destroy');
 
     $("#palavras").jQCloud(wordCloud, {
@@ -237,7 +270,14 @@ async function carregaCloudWords(data) {
     });
 }
 
-function carregaGrafico(data) {
+function carregaGrafico(data, element) {
+    let template = document.createElement('template');
+    template.innerHTML = `
+       <section id="stats-section"></section>
+    `;    
+    element.appendChild(template.content);
+
+
     const trace1 = {
         type: 'bar',
         x: data.x,
@@ -309,7 +349,7 @@ async function buscaMesAno() {
 async function buscaPrincipal() {
     document.getElementById('ano-busca').value = '';
     document.getElementById('mes-busca').value = '';    
-    let data = await getJson(window.url_pesquisa);
+    let data = await getJson(window.url_pesquisa);    
     carregaTimeLine(data);
     carregaMesAno(data);
     atualizaNuvem();
@@ -377,15 +417,44 @@ function hideLoadingIndicator() {
 
 async function atualizaNuvem() {
 //   showLoadingIndicator();
-  let cloudWordsData = await getJson(window.url_nuvem_de_palavras);
 //   hideLoadingIndicator();
-  carregaCloudWords(cloudWordsData);
-  carregarCronoCloud(cloudWordsData);
+  const element = document.getElementById("dados");
+  element.innerHTML = '';
+
+  let cloudWordsData = await getJson(window.url_nuvem_de_palavras);
+  if (cloudWordsData?.cronocloud?.rows?.length > 0) {
+      carregaCloudWords(cloudWordsData, element);
+      carregarCronoCloud(cloudWordsData, element);
+  } else {
+    let template = document.createElement('template');
+    template.innerHTML = '<div class="tl-message-full" style="position: relative"><div class="tl-message-container">' +
+          '<div class="tl-loading-icon"></div><div class="tl-message-content">' +
+          'Nenhuma notícia encontrada com esse critério de busca</div></div></div>';
+    element.innerHTML = '';
+    element.appendChild(template.content);
+  }
 }
 
 async function atualizaGrafico() {
+    if (activeSection !== "stats") {
+        return;
+    }
+
+    const element = document.getElementById("dados");
+    element.innerHTML = '';
+
     const graficoData = await getJson(window.url_grafico);
-    carregaGrafico(graficoData);
+    console.log(graficoData);
+    if (graficoData?.total > 0) {
+        carregaGrafico(graficoData, element);
+    } else {
+        let template = document.createElement('template');
+        template.innerHTML = '<div class="tl-message-full" style="position: relative"><div class="tl-message-container">' +
+              '<div class="tl-loading-icon"></div><div class="tl-message-content">' +
+              'Nenhuma notícia encontrada com esse critério de busca</div></div></div>';
+        element.innerHTML = '';
+        element.appendChild(template.content);
+    }
 }
 
 const botoesControle = [
