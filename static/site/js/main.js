@@ -350,6 +350,7 @@ async function buscaPrincipal() {
     document.getElementById('ano-busca').value = '';
     document.getElementById('mes-busca').value = '';    
     let data = await getJson(window.url_pesquisa);    
+    
     carregaTimeLine(data);
     carregaMesAno(data);
     atualizaNuvem();
@@ -373,6 +374,7 @@ let btnFonte = document.getElementById('btn-fonte');
 btnBusca.addEventListener('click', function (e) {
     e.preventDefault();
     buscaPrincipal();
+    $("#dados").addClass("d-none");
 });
 
 btnDownload.addEventListener('click', function (e) {
@@ -474,6 +476,7 @@ botoesControle.forEach(function(button) {
         let nuvemCronoMessage = $("#not-found-cloud");
         let statsMessage = $("#not-found-stats");
         let dadosSection = $("#dados");
+        $("#dados").removeClass("d-none");
         
 
         if (button.attr("id") === "cronocloud") {
