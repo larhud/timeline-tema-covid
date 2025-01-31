@@ -374,7 +374,9 @@ let btnFonte = document.getElementById('btn-fonte');
 btnBusca.addEventListener('click', function (e) {
     e.preventDefault();
     buscaPrincipal();
-    $("#dados").addClass("d-none");
+    if (activeSection == "") {
+        $("#dados").addClass("d-none");
+    }
 });
 
 btnDownload.addEventListener('click', function (e) {
