@@ -427,7 +427,7 @@ async function atualizaNuvem() {
       carregarCronoCloud(cloudWordsData, element);
   } else {
     let template = document.createElement('template');
-    template.innerHTML = '<div class="tl-message-full" style="position: relative"><div class="tl-message-container">' +
+    template.innerHTML = '<div id="not-found-cloud" class="tl-message-full" style="position: relative; width: 100%; height: 600px"><div class="tl-message-container">' +
           '<div class="tl-loading-icon"></div><div class="tl-message-content">' +
           'Nenhuma notícia encontrada com esse critério de busca</div></div></div>';
     element.innerHTML = '';
@@ -449,7 +449,7 @@ async function atualizaGrafico() {
         carregaGrafico(graficoData, element);
     } else {
         let template = document.createElement('template');
-        template.innerHTML = '<div class="tl-message-full" style="position: relative"><div class="tl-message-container">' +
+        template.innerHTML = '<div id="not-found-stats" class="tl-message-full" style="position: relative; width: 100%; height: 600px"><div class="tl-message-container">' +
               '<div class="tl-loading-icon"></div><div class="tl-message-content">' +
               'Nenhuma notícia encontrada com esse critério de busca</div></div></div>';
         element.innerHTML = '';
@@ -471,11 +471,17 @@ botoesControle.forEach(function(button) {
         let statsSection = $("#stats-section");
         let nuvemSection = $("#nuvem-section");
         let nuvemCronoSection = $("#crono-nuvem-section");
+        let nuvemCronoMessage = $("#not-found-cloud");
+        let statsMessage = $("#not-found-stats");
+        let dadosSection = $("#dados");
+        
 
         if (button.attr("id") === "cronocloud") {
             if (activeSection === "cloud") {
                 // Se a seção nuvem já estiver ativa, oculta todas as seções
                 timelineSection.show();
+                dadosSection.hide();
+                nuvemCronoMessage.hide();
                 statsSection.hide();
                 nuvemSection.hide();
                 nuvemCronoSection.hide();
@@ -496,6 +502,9 @@ botoesControle.forEach(function(button) {
             if (activeSection === "stats") {
                 // Se a seção de estatísticas já estiver ativa, mostra apenas a linha do tempo
                 timelineSection.show();
+                dadosSection.hide();
+                nuvemCronoMessage.hide();
+                statsMessage.hide();
                 statsSection.hide();
                 activeSection = ""; // Remove a seção ativa
                 button.removeClass("btn-clicked"); // Remove a classe de botão clicado
@@ -504,6 +513,7 @@ botoesControle.forEach(function(button) {
                 // Se a seção de estatísticas estiver inativa, mostra apenas as estatísticas
                 nuvemSection.hide();
                 timelineSection.hide();
+                nuvemCronoMessage.hide();
                 nuvemCronoSection.hide();
                 statsSection.show();
                 activeSection = "stats"; // Define a seção de estatísticas como ativa
