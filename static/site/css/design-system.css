@@ -1,0 +1,533 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+:root {
+  --dna-ink: #0b434f;
+  --dna-ink-soft: #244956;
+  --dna-teal: #16808d;
+  --dna-teal-muted: #40808b;
+  --dna-mint: #d0e6e2;
+  --dna-surface: #f6fbfa;
+  --dna-line: rgba(11, 67, 79, 0.18);
+  --dna-white: #ffffff;
+}
+
+body {
+  background: var(--dna-white);
+  color: var(--dna-ink-soft);
+  font-family: "DM Sans", sans-serif;
+}
+
+body.theme-page {
+  padding-top: 72px;
+}
+
+a {
+  color: var(--dna-ink);
+}
+
+a:hover {
+  color: var(--dna-teal);
+}
+
+#header,
+.navbar {
+  background: var(--dna-ink) !important;
+  border-bottom: 0;
+  box-shadow: none;
+  height: 72px;
+  min-height: 72px;
+}
+
+.navbar-brand {
+  align-items: center;
+  display: inline-flex;
+  gap: 16px;
+  margin-right: clamp(28px, 5vw, 72px);
+  max-width: 560px;
+  padding: 6px 0;
+}
+
+.dna-logo {
+  display: block;
+  height: auto;
+  max-height: 46px;
+  max-width: 300px;
+  width: min(300px, 48vw);
+}
+
+.larhud-logo {
+  display: block;
+  height: auto;
+  max-height: 46px;
+  max-width: 220px;
+  width: min(220px, 42vw);
+}
+
+.home-page .navbar-brand {
+  margin-right: 24px;
+}
+
+.home-page .pesquisa .search-box:focus {
+  border: 1px solid var(--dna-line) !important;
+  box-shadow: 0 0 0 0.15rem rgba(22, 128, 141, 0.16) !important;
+  color: var(--dna-ink) !important;
+}
+
+.home-page .pesquisa label {
+  color: var(--dna-mint) !important;
+}
+
+.home-page .pesquisa .search-box:focus + label {
+  color: var(--dna-teal) !important;
+}
+
+.home-page .pesquisa .search-box:focus + label .search-icon,
+.home-page .pesquisa .search-box + label .search-icon,
+.home-page .pesquisa .search-icon {
+  color: var(--dna-mint) !important;
+}
+
+.home-page .pesquisa .search-box:focus + label .search-icon {
+  color: var(--dna-teal) !important;
+}
+
+.home-page .pesquisa label svg path {
+  stroke: currentColor;
+}
+
+.navbar-expand-xl .navbar-nav .nav-link {
+  border-bottom: 2px solid transparent;
+  color: var(--dna-white);
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 12px;
+}
+
+.navbar-expand-xl .navbar-nav .nav-link:hover,
+.navbar-expand-xl .navbar-nav .nav-link.active {
+  border-bottom-color: var(--dna-mint);
+  color: var(--dna-mint);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,0.85)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.tema {
+  overflow: hidden;
+}
+
+.descricao {
+  background: linear-gradient(135deg, var(--dna-ink) 0%, var(--dna-teal-muted) 100%);
+  background-image: url("../img/dna/section-header-main-cropped.svg"), linear-gradient(135deg, var(--dna-ink) 0%, var(--dna-teal-muted) 100%);
+  background-position: right bottom, center;
+  background-repeat: no-repeat;
+  background-size: min(50%, 560px), cover;
+  border-radius: 0 0 36px 36px;
+  color: var(--dna-mint);
+  margin-bottom: 34px;
+  margin-top: 0;
+  padding: 54px 42px 50px;
+  position: relative;
+}
+
+.descricao::after {
+  background: radial-gradient(circle, rgba(208, 230, 226, 0.34) 0 2px, transparent 3px);
+  background-size: 24px 24px;
+  content: "";
+  inset: 0;
+  opacity: 0.36;
+  pointer-events: none;
+  position: absolute;
+}
+
+.descricao > * {
+  position: relative;
+  z-index: 1;
+}
+
+.descricao h1,
+.descricao h2 {
+  color: var(--dna-mint) !important;
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+
+.descricao p,
+.descricao li {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "DM Sans", sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 920px;
+}
+
+.filtro {
+  background: var(--dna-surface);
+  border-bottom: 1px solid var(--dna-line);
+  border-top: 1px solid var(--dna-line);
+  padding: 28px 0;
+}
+
+.filtro label,
+.titulo h5 {
+  color: var(--dna-ink);
+  font-family: "DM Sans", sans-serif;
+}
+
+.filtro .form-control,
+.filtro #dataFiltro,
+.form-select {
+  background-color: var(--dna-white);
+  border: 1px solid var(--dna-line);
+  border-radius: 14px;
+  color: var(--dna-ink);
+  font-family: "DM Sans", sans-serif;
+}
+
+.filtro .form-control:focus,
+.filtro #dataFiltro:focus,
+.form-select:focus {
+  border-color: var(--dna-teal);
+  box-shadow: 0 0 0 0.2rem rgba(22, 128, 141, 0.18);
+}
+
+.btn-primary,
+.filtro .form .campo .btn-primary {
+  background: var(--dna-teal);
+  border-color: var(--dna-teal);
+  border-radius: 14px;
+  color: var(--dna-white);
+  font-family: "DM Sans", sans-serif;
+  font-weight: 700;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: var(--dna-ink);
+  border-color: var(--dna-ink);
+}
+
+.borda,
+.dropdown-menu,
+.filtro .accordion .accordion-collapse {
+  border: 1px solid var(--dna-line) !important;
+  border-radius: 18px;
+  box-shadow: 0 18px 44px rgba(11, 67, 79, 0.12) !important;
+}
+
+.meses {
+  background: var(--dna-white);
+  margin: 0;
+  padding: 24px 0;
+}
+
+.meses .container .centro div h2,
+.meses .container .direita a,
+.meses .container .esquerda a {
+  color: var(--dna-ink);
+  font-family: "DM Sans", sans-serif;
+}
+
+.timeline {
+  background: linear-gradient(180deg, var(--dna-mint) 0%, var(--dna-surface) 100%);
+  background-image: url("../img/dna/section-narrativas-fundo.svg"), linear-gradient(180deg, var(--dna-mint) 0%, var(--dna-surface) 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 34px 0;
+}
+
+.bg-larhud {
+  background: var(--dna-ink) !important;
+}
+
+.home-page .banner {
+  background-color: var(--dna-ink) !important;
+  background-image: url("../img/dna/section-header-main-cropped.svg"), linear-gradient(135deg, var(--dna-ink) 0%, var(--dna-teal-muted) 100%) !important;
+  background-position: right bottom, center !important;
+  background-repeat: no-repeat;
+  background-size: min(44vw, 540px), cover !important;
+}
+
+.home-page .banner {
+  color: var(--dna-mint);
+  overflow: hidden;
+  position: relative;
+}
+
+.home-page .banner::after {
+  background: radial-gradient(circle, rgba(208, 230, 226, 0.3) 0 2px, transparent 3px);
+  background-size: 24px 24px;
+  content: "";
+  inset: 0;
+  opacity: 0.18;
+  pointer-events: none;
+  position: absolute;
+}
+
+.home-page .banner .container {
+  position: relative;
+  z-index: 1;
+}
+
+.home-page .banner .esquerda h5,
+.home-page .banner .direita h4,
+.home-page .banner .esquerda p,
+.home-page .banner .direita ul li {
+  color: var(--dna-mint);
+}
+
+.home-page .banner .anos .item .ball {
+  background: var(--dna-mint);
+  border-color: var(--dna-teal);
+}
+
+.home-page .banner .anos .item p,
+.home-page .banner .anos .itemActive p {
+  color: var(--dna-white) !important;
+  text-shadow: 0 1px 2px rgba(11, 67, 79, 0.36);
+}
+
+.home-page .banner .anos .itemActive .ball,
+.home-page .banner .anos .linha div {
+  background: var(--dna-teal);
+}
+
+.home-page .titulo h5,
+.home-page .timeline .topo .titulo h5 {
+  color: var(--dna-teal);
+}
+
+.home-page .titulo h2,
+.home-page .contato h2 {
+  color: var(--dna-ink);
+}
+
+.home-page .timeline .swiper-slide .item .conteudo a,
+.home-page .timeline .itens .item .conteudo a,
+.home-page .contato .esquerda .redes a {
+  color: var(--dna-teal) !important;
+}
+
+.home-page .timeline .swiper-slide .item .conteudo a:hover,
+.home-page .timeline .itens .item .conteudo a:hover,
+.home-page .contato .esquerda .redes a:hover {
+  color: var(--dna-ink) !important;
+}
+
+.home-page .timeline .paginationjs-pages ul li.active a {
+  background: var(--dna-mint) !important;
+  color: var(--dna-ink) !important;
+}
+
+.home-page .timeline .paginationjs-pages ul li a:hover {
+  color: var(--dna-teal) !important;
+}
+
+.home-page .contato .formulario input.form-control:hover,
+.home-page .contato .formulario input.form-control:focus,
+.home-page .contato .formulario textarea.form-control:hover,
+.home-page .contato .formulario textarea.form-control:focus {
+  border-color: var(--dna-teal) !important;
+}
+
+.home-page .objetivos,
+.home-page .contato {
+  background: var(--dna-white);
+}
+
+.home-page .objetivos {
+  background-image: url("../img/dna/section-conheca-fundo.svg");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+}
+
+.home-page .rodape {
+  background-color: var(--dna-ink) !important;
+  background-image: url("../img/dna/section-narrativas-fundo.svg"), linear-gradient(180deg, var(--dna-ink) 0%, #08333d 100%) !important;
+  background-position: right bottom, center !important;
+  background-repeat: no-repeat;
+  background-size: min(42vw, 420px), cover !important;
+}
+
+.home-page .rodape .linha1,
+.home-page .rodape .linha2 {
+  background: transparent !important;
+}
+
+.home-page .rodape .linha2 {
+  border-top: 1px solid rgba(208, 230, 226, 0.18);
+}
+
+.home-page .rodape .dna-logo {
+  filter: brightness(0) invert(1);
+}
+
+.home-page .rodape p,
+.home-page .rodape a,
+.home-page .rodape h6 {
+  color: var(--dna-mint) !important;
+}
+
+.home-page .rodape .linha1 .menu .links a:hover,
+.home-page .rodape .linha2 .container .redes a:hover {
+  color: var(--dna-white) !important;
+  text-shadow: none;
+}
+
+#timeline-embed {
+  border: 1px solid var(--dna-line);
+  border-radius: 26px;
+  box-shadow: 0 24px 60px rgba(11, 67, 79, 0.12);
+  overflow: hidden;
+}
+
+.tl-timeline .tl-slider-background {
+  background-color: var(--dna-ink) !important;
+}
+
+.rodape {
+  background: var(--dna-ink);
+  border-top: 0;
+  color: var(--dna-mint);
+  padding: 34px 0;
+}
+
+.rodape .container p,
+.rodape .container .redes a {
+  color: var(--dna-mint);
+}
+
+@media screen and (max-width: 1199px) {
+  .navbar .navbar-nav {
+    background: var(--dna-ink) !important;
+  }
+
+  .navbar .navbar-collapse {
+    background: var(--dna-ink) !important;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 24px rgba(11, 67, 79, 0.24);
+    top: 78px !important;
+  }
+
+  .navbar .navbar-collapse .nav-link {
+    color: var(--dna-white) !important;
+    border-bottom-color: transparent !important;
+  }
+
+  .navbar .navbar-collapse .nav-link:hover,
+  .navbar .navbar-collapse .nav-link.active {
+    color: var(--dna-mint) !important;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+  }
+}
+
+.dna-logo-ibict {
+  display: block;
+  height: auto;
+  max-height: 40px;
+  max-width: 100px;
+  width: auto;
+  opacity: 0.92;
+}
+
+/* Dropdowns mês/ano — sobrescreve stroke hardcoded no SVG */
+#dropDownMes svg path,
+#dropDownAno svg path {
+  stroke: var(--dna-teal) !important;
+}
+
+/* Accordion filtros */
+.filtro .accordion-button:not(.collapsed) {
+  border-color: var(--dna-teal) !important;
+  color: var(--dna-ink) !important;
+  box-shadow: inset 0 -1px 0 var(--dna-line);
+}
+
+/* Daterangepicker — datas ativas em teal (não azul) */
+.daterangepicker .drp-buttons .applyBtn,
+.daterangepicker .drp-buttons .applyBtn.btn-primary {
+  background-color: var(--dna-teal) !important;
+  border-color: var(--dna-teal) !important;
+  color: var(--dna-white) !important;
+}
+
+.daterangepicker .drp-buttons .applyBtn:hover,
+.daterangepicker .drp-buttons .applyBtn:focus {
+  background-color: var(--dna-ink) !important;
+  border-color: var(--dna-ink) !important;
+}
+
+.daterangepicker td.in-range {
+  background-color: rgba(208, 230, 226, 0.46) !important;
+  color: var(--dna-ink) !important;
+}
+
+.daterangepicker td.start-date {
+  border-radius: 12px 0 0 12px !important;
+}
+
+.daterangepicker td.end-date {
+  border-radius: 0 12px 12px 0 !important;
+}
+
+.daterangepicker td.start-date.end-date {
+  border-radius: 12px !important;
+}
+
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
+  background-color: var(--dna-teal) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--dna-white) !important;
+}
+
+.daterangepicker td.available:hover {
+  background-color: var(--dna-mint) !important;
+  color: var(--dna-ink) !important;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding-top: 0;
+  }
+
+  body.theme-page {
+    padding-top: 96px;
+  }
+
+  #header,
+  .navbar {
+    min-height: 78px;
+  }
+
+  .dna-logo {
+    max-height: 42px;
+    width: min(270px, 64vw);
+  }
+
+  .descricao {
+    background-size: 80%, cover;
+    border-radius: 0 0 24px 24px;
+    margin-top: -18px;
+    padding: 38px 22px;
+  }
+
+  .home-page .banner {
+    background-position: right bottom, center;
+    background-size: 86%, cover;
+  }
+}

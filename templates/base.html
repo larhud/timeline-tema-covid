@@ -4,7 +4,7 @@
 <html lang="pt-br">
 
 <head>
-    <!-- Required meta tags -->s
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="{% static " site/favicon.ico" %}">
@@ -14,15 +14,16 @@
     <link rel="stylesheet" href="{% static 'site/css/daterangepicker.css' %}" />
     <link rel="stylesheet" href="{% static 'site/css/jqcloud.css' %}">
     <link rel="stylesheet" href="{% static 'site/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'site/css/design-system.css' %}?v=20260616">
     {% block styles %}{% endblock %}
     <title>LARHUD IBICT - Timeline</title>
 </head>
 
-<body>
+<body class="theme-page">
     <nav class="navbar navbar-expand-xl fixed-top bg-light" id="header">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="{% static " site/img/logo.png" %}" alt="">
+            <a class="navbar-brand" href="/">
+                <img class="dna-logo" src="{% static 'site/img/dna/logo.svg' %}" alt="DNA IBICT">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

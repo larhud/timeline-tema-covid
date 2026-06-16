@@ -12,6 +12,7 @@
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static "site/css/home-style.css" %}" />
+    <link rel="stylesheet" href="{% static 'site/css/design-system.css' %}?v=20260616" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -21,12 +22,11 @@
     />
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
   </head>
-  <body>
+  <body class="home-page">
     <nav class="navbar navbar-expand-xl navbar-light bg-larhud">
       <div class="container">
-        <a class="navbar-brand" href="http://www.larhud.ibict.br">
-            <img src="{% static "site/img/logoLARHUD.png" %}" alt="" />
-            <img src="{% static "site/img/logoIbict.png" %}" alt="" />
+        <a class="navbar-brand" href="/">
+            <img class="dna-logo" src="{% static 'site/img/dna/logo.svg' %}" alt="DNA IBICT" />
         </a>
         <div class="d-flex align-items-center">
           <button
@@ -261,11 +261,9 @@
       <div class="linha1">
         <div class="container">
           <div>
-            <a class="d-flex align-items-center" href="#"
-              ><img src="img/logoLarhudBranca.png" alt="" /><img
-                src="img/logoIbictBranca.png"
-                alt=""
-            /></a>
+            <a class="d-flex align-items-center" href="/">
+              <img class="dna-logo" src="{% static 'site/img/dna/logo.svg' %}" alt="DNA IBICT" />
+            </a>
             <p class="mt-4">Projeto Timeline Larhud /IBICT, linhas do tempo.</p>
           </div>
 
