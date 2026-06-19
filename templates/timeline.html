@@ -7,12 +7,16 @@
 
 {% endblock %}
 {% block content %}
-<section class="container descricao">
+{% block hero %}
+<section class="{% block hero_section_class %}container descricao{% endblock %}">
+    {% block hero_inner_start %}{% endblock %}
     {% block termo_descricao %}
     <h1>Header</h1>
     <p>Descrição do Projeto</p>
     {% endblock %}
+    {% block hero_inner_end %}{% endblock %}
 </section>
+{% endblock %}
 <section class="filtro">
     <div class="container">
 
