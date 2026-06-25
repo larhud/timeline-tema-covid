@@ -4,7 +4,7 @@
 <html lang="pt-br">
 
 <head>
-    <!-- Required meta tags -->s
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="{% static " site/favicon.ico" %}">
@@ -18,7 +18,8 @@
     <title>LARHUD IBICT - Timeline</title>
 </head>
 
-<body>
+<body{% block body_attrs %}{% endblock %}>
+    {% block navbar %}
     <nav class="navbar navbar-expand-xl fixed-top bg-light" id="header">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -45,6 +46,7 @@
             </div>
         </div>
     </nav>
+    {% endblock %}
     <main class="tema">
         {% block content %}
         {% endblock %}

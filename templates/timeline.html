@@ -7,12 +7,16 @@
 
 {% endblock %}
 {% block content %}
-<section class="container descricao">
+{% block hero %}
+<section class="{% block hero_section_class %}container descricao{% endblock %}">
+    {% block hero_inner_start %}{% endblock %}
     {% block termo_descricao %}
     <h1>Header</h1>
     <p>Descrição do Projeto</p>
     {% endblock %}
+    {% block hero_inner_end %}{% endblock %}
 </section>
+{% endblock %}
 <section class="filtro">
     <div class="container">
 
@@ -58,6 +62,7 @@
                                 placeholder="Busca por data">
                         </div>
 
+                        {% block filtro_veiculo %}
                         <div class="col-md-6 position-relative">
                             <input type="text" name="veiculo" placeholder="Veículo de Comunicação" id="btn-fonte"
                                 class="form-control">
@@ -75,6 +80,7 @@
                                 </svg>
                             </button>
                         </div>
+                        {% endblock %}
 
                         <div class="col-md-1 d-flex justify-content-end">
                             <a id="cronocloud" href="#" class="btn btn-primary w-100" title="Nuvem Temporal"
@@ -229,6 +235,6 @@
     window.url_grafico = "{% url 'daily_statistics' %}";
     window.url_lista_de_fontes = "{% url 'lista_de_fontes' object.id %}"
 </script>
-<script src="{{ STATIC_URL }}site/js/main.js"></script>
+<script src="{{ STATIC_URL }}site/js/main.js?v=20260625"></script>
 <script src="{{ STATIC_URL }}site/js/lista-de-fontes.js"></script>
 {% endblock %}
