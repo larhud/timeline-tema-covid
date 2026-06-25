@@ -34,6 +34,10 @@ function seleciona(m) {
   $("#mesAtual").html(mesAtual);
   $("#mesProximo").html(mesProximo);
   $('#mes-busca').val(mes + 1);
+
+  $(".mes .dropdown-menu li").each(function (index) {
+      $(this).toggle(index !== m);
+  });
 }
 
 $(".anterior").click(function (e) {
