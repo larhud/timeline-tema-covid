@@ -196,7 +196,7 @@ async function carregaTimeLine(data) {
 
       template.innerHTML = '<div class="tl-message-full"><div class="tl-message-container">' +
           '<div class="tl-loading-icon"></div><div class="tl-message-content">' +
-          'Nenhuma notícia encontrada com esse critério de busca</div></div></div>';
+          'Nenhum registro encontrado</div></div></div>';
 
       element.appendChild(template.content);
   }
@@ -437,7 +437,7 @@ async function atualizaNuvem() {
     let template = document.createElement('template');
     template.innerHTML = '<div id="not-found-cloud" class="tl-message-full" style="position: relative; width: 100%; height: 600px"><div class="tl-message-container">' +
           '<div class="tl-loading-icon"></div><div class="tl-message-content">' +
-          'Nenhuma notícia encontrada com esse critério de busca</div></div></div>';
+          'Nenhum registro encontrado</div></div></div>';
     element.innerHTML = '';
     element.appendChild(template.content);
   }
@@ -459,7 +459,7 @@ async function atualizaGrafico() {
         let template = document.createElement('template');
         template.innerHTML = '<div id="not-found-stats" class="tl-message-full" style="position: relative; width: 100%; height: 600px"><div class="tl-message-container">' +
               '<div class="tl-loading-icon"></div><div class="tl-message-content">' +
-              'Nenhuma notícia encontrada com esse critério de busca</div></div></div>';
+              'Nenhum registro encontrado</div></div></div>';
         element.innerHTML = '';
         element.appendChild(template.content);
     }
