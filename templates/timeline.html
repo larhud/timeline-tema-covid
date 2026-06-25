@@ -62,6 +62,7 @@
                                 placeholder="Busca por data">
                         </div>
 
+                        {% block filtro_veiculo %}
                         <div class="col-md-6 position-relative">
                             <input type="text" name="veiculo" placeholder="Veículo de Comunicação" id="btn-fonte"
                                 class="form-control">
@@ -79,6 +80,7 @@
                                 </svg>
                             </button>
                         </div>
+                        {% endblock %}
 
                         <div class="col-md-1 d-flex justify-content-end">
                             <a id="cronocloud" href="#" class="btn btn-primary w-100" title="Nuvem Temporal"
