@@ -1,12 +1,12 @@
-{% load static from staticfiles %}
+{% load static %}
 {% load core_extra %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LARHUD - ibict | timeline</title>
+    <title>LARHUD - Tempora</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"
@@ -121,7 +121,7 @@
             </div>
           </div>
           <div class="item">
-            <p>2021</p>
+            <p>2022</p>
             <div class="ball"></div>
           </div>
           <div class="item">
@@ -316,6 +316,7 @@
             PPGCI/IBICT | UFRJ - Esta obra está licenciada sob uma Licença
             Creative Commons
           </p>
+          <p>As pesquisas e coletas destes conjuntos de dados do Larhud receberam apoio financeiro, no âmbito da bolsa de produtividade PQ do seu respectivo coordenador, do Conselho Nacional de Desenvolvimento Científico e Tecnológico - CNPq - Brasil. Bolsa de Produtividade em Pesquisa CNPq - 314516/2021-2</p>
           <div class="redes d-flex">
             <a href="#" target="_blank" rel="noopener noreferrer"
               ><i class="fa-brands fa-twitter"></i
@@ -333,8 +334,8 @@
     <script>
       window.__lista_de_termos__ = "{% url 'lista_de_termos' %}";
     </script>
-    <script src="{% static 'site/js/jquery-3.6.0.min.js' %}"></script>
-    <script src="{% static 'site/js/pagination.min.js' %}"></script>
+    <script src="{% static 'admin/js/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/pagination.min.js' %}"></script>
     <script src="{% static 'site/js/lista-de-termos.js' %}"></script>
     <script src="{% static 'site/js/contato.js' %}"></script>
     <script

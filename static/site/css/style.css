@@ -41,6 +41,11 @@ body {
   padding: 10px 10px;
   border-bottom: 2px solid transparent;
 }
+
+.btn-clicked{
+  box-shadow: inset 0px 5px 36px 0px rgba(0, 0, 0, 0.60);
+}
+
 @media screen and (min-width: 1387px) {
   .navbar-expand-xl .navbar-nav .nav-link {
     margin: 0 10px;
@@ -80,11 +85,27 @@ body {
 .descricao h1 {
   font-style: normal;
   font-weight: 600;
-  font-size: 60px;
+  font-size: 55px;
   line-height: 72px;
   letter-spacing: -0.02em;
   color: #2670e8;
 }
+
+#form-busca{
+  font-size: 15px
+}
+#busca-avancada{
+  font-size: 15px
+}
+#collapseFonte{
+  font-size: 15px
+}
+
+.filtro .form .campo{
+  background-color: #fff;
+}
+
+
 @media (max-width: 768px) {
   .descricao h1 {
     font-size: 45px;
@@ -129,7 +150,7 @@ body {
   background: #eaeaea;
 }
 .filtro .form .campo {
-  background: #fafafa;
+  background: #FFF;
   border-radius: 8px;
   padding: 10px;
   display: grid;
@@ -160,6 +181,9 @@ body {
   outline: 0 none;
   min-width: 150px;
   width: 100%;
+  background-color: #f4f4f4;
+  padding: 8px;
+  border-radius: 10px;
 }
 .filtro .form .campo input:focus {
   border: none;
@@ -169,6 +193,7 @@ body {
 .filtro .form .campo input .avancada svg {
   max-height: 20px;
 }
+
 .filtro .form .campo .btn-primary {
   background: #2670e8;
   font-weight: 500;
@@ -176,11 +201,19 @@ body {
   margin-right: 10px;
 }
 .filtro .form-control {
-  background: #fafafa;
-  border-radius: 8px;
-  border: 2px solid transparent;
+  font-size: 15px;
+  background-color: #f4f4f4;
+  padding: 8px;
+  border-radius: 10px;
 }
+
+
+
 @media screen and (max-width: 768px) {
+  .btn-tabela{
+    height: 41px !important;
+    right: 12px !important;
+  }
   .filtro .form-control {
     margin-bottom: 10px;
   }
@@ -206,8 +239,10 @@ body {
   outline: 0 none;
 }
 .filtro #dataFiltro {
-  height: 55px;
-  margin-top: 2px;
+  background-color: #f4f4f4;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 15px;
 }
 .filtro .accordion {
   position: relative;

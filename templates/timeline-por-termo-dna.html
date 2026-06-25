@@ -1,0 +1,46 @@
+{% extends 'timeline-por-termo.html' %}
+{% load static %}
+
+{% block body_attrs %} class="theme-page dna-timeline"{% endblock %}
+
+{% block styles %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'site/css/design-system.css' %}?v=20260616">
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-xl fixed-top bg-light" id="header">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img class="dna-logo" src="{% static 'site/img/dna/logo.svg' %}" alt="DNA IBICT">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+            <ul class="navbar-nav mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://www.larhud.ibict.br">Sobre o Larhud</a>
+                </li>
+                <li class="nav-item">
+                    {% block project_page %}
+                    <a class="nav-link" href="http://www.larhud.ibict.br/timeline-larhud-ibict/">Sobre o Projeto</a>
+                    {% endblock %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block hero_section_class %}descricao{% endblock %}
+{% block hero_inner_start %}<div class="container">{% endblock %}
+{% block hero_inner_end %}</div>{% endblock %}
+{% block filtro_veiculo %}
+<input type="hidden" name="veiculo" id="btn-fonte">
+<div class="col-md-6 d-none d-md-block"></div>
+{% endblock %}

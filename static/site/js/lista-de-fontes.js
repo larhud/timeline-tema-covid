@@ -11,9 +11,9 @@
 
         containerFontes.on('click', '.fonte-item', function () {
             // Atribui a seleção no campo de filtro de veículo
-            $('#veiculo').val($(this).text());
+            $('#btn-fonte').val($(this).text());
             // Fecha a lista
-            $('#btn-fonte').click();
+            // $('#btn-fonte').click();
             // Executa a busca
             $('#btn-busca').click();
         });
@@ -24,7 +24,7 @@
             $.get(window.url_lista_de_fontes, {page: pagina}, function (data) {
 
                 if (!containerPaginas.children().length) {
-                    let num_paginas = data.paginas;
+                    let num_paginas = data.num_pages;
 
                     for (let i = 1; i <= num_paginas; i++) {
                         containerPaginas.append(
@@ -39,10 +39,10 @@
                 // Monta lista de fontes
                 containerFontes.empty();
 
-                data.lista.forEach(function (item) {
+                data.items.forEach(function (item) {
                     containerFontes.append(
                         '<div class="col-md-3"><a href="#select" class="fonte-item" data-toggle="tooltip" ' +
-                        'data-placement="top" title="' + item.noticia__fonte__count + ' noticia(s)">' +
+                        'data-placement="top" title="' + item.total + ' noticia(s)">' +
                         item.noticia__fonte + '</a></div>'
                     );
                 });
